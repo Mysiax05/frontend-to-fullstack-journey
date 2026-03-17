@@ -1,0 +1,75 @@
+header {
+  padding: 0 0 0 5px;
+}
+
+header h1 {
+  margin: 5px;
+  font-size: 36px;
+}
+
+
+nav {
+  display: inline-block;
+}
+
+nav ul {
+  width: 80px;
+  padding: 20px 0 20px 40px;
+  font-size: 18px;
+}
+
+
+aside {
+  width: 500px;
+  position: fixed;
+  right: 8px;
+  top: 65px;
+  margin-top: 15px;
+}
+
+aside h1 {
+  margin: 5px 0 0 10px;
+  font-size: 30px;
+}
+
+aside h2 {
+  margin: 0 0 0 10px;
+  font-size: 30px;
+}
+
+aside ul {
+  margin: 20px 0 20px 0;
+  font-size: 18px;
+}
+
+
+main {
+  width: 400px;
+  padding: 5px;
+  margin: 0 0 10px 0;
+}
+
+main h1 {
+  margin: 5px;
+  font-size: 34px;
+}
+
+main blockquote {
+  margin: 5px;
+}
+
+
+footer {
+  padding: 5px;
+  font-size: 16px;
+}
+
+
+.azure {
+  background-color:aliceblue;
+}
+
+.border-shadow {
+  border: 1px solid black;
+  box-shadow: 0 0 5px gray;
+}
