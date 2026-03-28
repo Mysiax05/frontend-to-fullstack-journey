@@ -15,47 +15,57 @@
     <title>Tytuł strony / Page Title</title>
   </head>
   <body>
-    <header class="flex justify-between align-top bg-blue-200 mx-5 p-1">
-      <p class="p-1">Dziekanat</p>
-      <nav>
-        <button class="rounded-xl border border-gray-500 px-3 py-1">
+    <header class="align-top bg-blue-200 mx-5 p-1">
+      <nav class="flex justify-between items-start">
+        <ul
+          class="p-2 text-gray-500 flex md:flex-col lg:flex-row lg:items-center lg:gap-5 lg:w-full"
+        >
+          <li class="text-xl text-black">Dziekanat</li>
+          <li class="hidden md:block">Studia stacjonarne</li>
+          <li class="hidden md:block">Studia niestacjonarne</li>
+          <li class="hidden md:block">Pracownicy</li>
+          <li class="hidden md:block lg:ml-auto">USOS</li>
+        </ul>
+        <button class="rounded-xl border border-gray-500 px-3 py-1 lg:hidden">
           <i class="fa-solid fa-bars"></i>
         </button>
       </nav>
     </header>
 
     <main>
-      <h1 class="flex justify-center text-3xl p-1">Wydział Informatyki</h1>
+      <h1 class="text-center text-3xl p-1">Wydział Informatyki</h1>
 
-      <div class="border border-gray-300 rounded-md m-5 mt-0">
-        <p class="p-2 flex justify-center">Jan Kowalski</p>
-        <div class="border border-gray-300 flex flex-col items-center">
-          <img src="src/man.png" alt="man" class="p-2" />
-          <p>Pracownik</p>
+      <div class="flex flex-col md:items-start md:flex-row">
+        <div class="border border-gray-300 rounded-md m-5 mt-0">
+          <p class="p-2 text-center">Jan Kowalski</p>
+          <div class="border border-gray-300 flex flex-col items-center">
+            <img src="src/man.png" alt="man" class="p-2" />
+            <p>Pracownik</p>
+          </div>
+          <p class="text-center p-1">Karta 1</p>
         </div>
-        <p class="flex justify-center p-1">Karta 1</p>
-      </div>
 
-      <div class="border border-gray-300 rounded-md m-5 mt-0">
-        <p class="p-2 flex justify-center">Anna Nowak</p>
-        <div class="border border-gray-300 flex flex-col items-center">
-          <h1 class="text-xl p-2">
-            Informatyka - Uczenie Maszynowe i Sztuczna Inteligencja
-          </h1>
-          <img src="src/woman.png" alt="woman" class="p-2" />
-          <p>Studentka</p>
+        <div class="border border-gray-300 rounded-md m-5 mt-0">
+          <p class="p-2 text-center">Anna Nowak</p>
+          <div class="border border-gray-300 flex flex-col items-center">
+            <h2 class="text-xl p-2">
+              Informatyka - Uczenie Maszynowe i Sztuczna Inteligencja
+            </h2>
+            <img src="src/woman.png" alt="woman" class="p-2" />
+            <p>Studentka</p>
+          </div>
+          <p class="text-center p-1">Karta 2</p>
         </div>
-        <p class="flex justify-center p-1">Karta 2</p>
-      </div>
 
-      <div class="border border-gray-300 rounded-md m-5 mt-0">
-        <p class="p-2 flex justify-center">Jerzy Zmuda</p>
-        <div class="border border-gray-300 flex flex-col items-center">
-          <h1 class="text-xl p-2">Informatyka - Data Science</h1>
-          <img src="src/man.png" alt="man" class="p-2" />
-          <p>Student</p>
+        <div class="border border-gray-300 rounded-md m-5 mt-0">
+          <p class="p-2 text-center">Jerzy Zmuda</p>
+          <div class="border border-gray-300 flex flex-col items-center">
+            <h2 class="text-xl p-2">Informatyka - Data Science</h2>
+            <img src="src/man.png" alt="man" class="p-2" />
+            <p>Student</p>
+          </div>
+          <p class="text-center p-1">Karta 3</p>
         </div>
-        <p class="flex justify-center p-1">Karta 3</p>
       </div>
     </main>
 
