@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Tailwind JS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Icons -->
@@ -14,5 +14,57 @@
     />
     <title>Tytuł strony / Page Title</title>
   </head>
-  <body></body>
+  <body>
+    <header class="flex justify-between align-top bg-blue-200 mx-5 p-1">
+      <p class="p-1">Dziekanat</p>
+      <nav>
+        <button class="rounded-xl border border-gray-500 px-3 py-1">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <h1 class="flex justify-center text-3xl p-1">Wydział Informatyki</h1>
+
+      <div class="border border-gray-300 rounded-md m-5 mt-0">
+        <p class="p-2 flex justify-center">Jan Kowalski</p>
+        <div class="border border-gray-300 flex flex-col items-center">
+          <img src="src/man.png" alt="man" class="p-2" />
+          <p>Pracownik</p>
+        </div>
+        <p class="flex justify-center p-1">Karta 1</p>
+      </div>
+
+      <div class="border border-gray-300 rounded-md m-5 mt-0">
+        <p class="p-2 flex justify-center">Anna Nowak</p>
+        <div class="border border-gray-300 flex flex-col items-center">
+          <h1 class="text-xl p-2">
+            Informatyka - Uczenie Maszynowe i Sztuczna Inteligencja
+          </h1>
+          <img src="src/woman.png" alt="woman" class="p-2" />
+          <p>Studentka</p>
+        </div>
+        <p class="flex justify-center p-1">Karta 2</p>
+      </div>
+
+      <div class="border border-gray-300 rounded-md m-5 mt-0">
+        <p class="p-2 flex justify-center">Jerzy Zmuda</p>
+        <div class="border border-gray-300 flex flex-col items-center">
+          <h1 class="text-xl p-2">Informatyka - Data Science</h1>
+          <img src="src/man.png" alt="man" class="p-2" />
+          <p>Student</p>
+        </div>
+        <p class="flex justify-center p-1">Karta 3</p>
+      </div>
+    </main>
+
+    <footer class="flex justify-between align-bottom bg-blue-200 m-5 p-1">
+      <a
+        href="#"
+        class="text-blue-600 underline hover:text-blue-800 visited:text-purple-600"
+        >Adres email</a
+      >
+    </footer>
+  </body>
 </html>
