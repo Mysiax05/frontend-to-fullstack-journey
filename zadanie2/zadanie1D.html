@@ -1,0 +1,24 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <title>Plik 'zadanie1D.html'</title>
+  </head>
+  <body>
+    <form
+      onInput="wynik.value = sum_strings([pole_liczbowe1.value, pole_liczbowe2.value])"
+    >
+      <input id="pole_liczbowe1" type="text" placeholder="Wprowadź tekst" />
+      +
+      <input id="pole_liczbowe2" type="text" placeholder="Wprowadź tekst" />
+      =
+      <output name="wynik">Tu pojawi się wynik obliczeń</output>
+      <br />
+    </form>
+    <script type="module">
+      import { sum_strings } from "./zadanie2.js";
+      window.sum_strings = sum_strings;
+    </script>
+  </body>
+</html>
