@@ -1,1 +1,45 @@
 import "./style.css";
+
+function drawLogo() {
+  "use strict";
+  const canvas = document.all.canvas;
+  const ctx = canvas.getContext("2d");
+
+  ctx.fillStyle = "#eff6ff";
+  ctx.beginPath();
+  ctx.arc(100, 100, 95, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.lineWidth = 6;
+  ctx.strokeStyle = "#3b82f6";
+  ctx.stroke();
+
+  ctx.fillStyle = "#1e3a8a";
+  ctx.fillRect(55, 40, 25, 80);
+  ctx.fillRect(55, 120, 70, 25);
+
+  ctx.fillStyle = "#3b82f6";
+  ctx.beginPath();
+  ctx.fillRect(100, 40, 25, 105);
+  ctx.arc(125, 76, 36, -Math.PI / 2, Math.PI / 2);
+  ctx.fill();
+
+  ctx.fillStyle = "#eff6ff";
+  ctx.beginPath();
+  ctx.moveTo(125, 56);
+  ctx.lineTo(150, 78);
+  ctx.lineTo(125, 96);
+  ctx.fill();
+}
+drawLogo();
+
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+
+if (menuBtn && mobileMenu) {
+  const menuItems = mobileMenu.querySelectorAll("li.hidden");
+  menuBtn.addEventListener("click", () => {
+    menuItems.forEach((item) => {
+      item.classList.toggle("hidden");
+    });
+  });
+}

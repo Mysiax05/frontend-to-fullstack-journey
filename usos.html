@@ -7,7 +7,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
-    <title>UniPortal</title>
+    <title>USOS</title>
   </head>
   <body>
     <header class="align-top bg-blue-200 mx-5 p-1">
@@ -44,43 +44,38 @@
       </nav>
     </header>
 
-    <main>
-      <h1 class="text-center text-3xl p-1">Wydział Informatyki</h1>
-
-      <div class="flex flex-col md:items-start md:flex-row">
-        <div class="border border-gray-300 rounded-md m-5 mt-0">
-          <p class="p-2 text-center">Jan Kowalski</p>
-          <div class="border border-gray-300 flex flex-col items-center">
-            <img src="src/assets/man.png" alt="man" class="p-2" />
-            <p>Pracownik</p>
-          </div>
-          <p class="text-center p-1">Karta 1</p>
+    <main class="flex flex-col items-center m-10">
+      <form name="usosForm">
+        <input
+          name="basicInput"
+          placeholder="Imie Nazwisko, (Ocena, Przedmiot)"
+          class="border border-gray-300 rounded-md my-5 p-5 w-l md:w-xl text-xs"
+        />
+        <div class="flex flex-col gap-5">
+          <button
+            type="button"
+            onclick="addDegree()"
+            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
+          >
+            Dodaj
+          </button>
+          <button
+            type="button"
+            onclick="deleteDegree()"
+            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
+          >
+            Usuń
+          </button>
+          <button
+            type="button"
+            onclick="showResults()"
+            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
+          >
+            Wyświetl
+          </button>
         </div>
-
-        <div class="border border-gray-300 rounded-md m-5 mt-0">
-          <p class="p-2 text-center">Anna Nowak</p>
-          <div class="border border-gray-300 flex flex-col items-center">
-            <h2 class="text-xl p-2">
-              Informatyka - Uczenie Maszynowe i Sztuczna Inteligencja
-            </h2>
-            <img src="src/assets/woman.png" alt="woman" class="p-2" />
-            <p>Studentka</p>
-          </div>
-          <p class="text-center p-1">Karta 2</p>
-        </div>
-
-        <div class="border border-gray-300 rounded-md m-5 mt-0">
-          <p class="p-2 text-center">Jerzy Zmuda</p>
-          <div class="border border-gray-300 flex flex-col items-center">
-            <h2 class="text-xl p-2">Informatyka - Data Science</h2>
-            <img src="src/assets/man.png" alt="man" class="p-2" />
-            <p>Student</p>
-          </div>
-          <p class="text-center p-1">Karta 3</p>
-        </div>
-      </div>
+      </form>
     </main>
-
     <footer class="flex justify-between align-bottom bg-blue-200 m-5 p-1">
       <a
         href="#"
@@ -88,6 +83,7 @@
         >Adres email</a
       >
     </footer>
+    <script type="module" src="/src/usos.js"></script>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
