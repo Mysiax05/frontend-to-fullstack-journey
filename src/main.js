@@ -31,3 +31,15 @@ function drawLogo() {
   ctx.fill();
 }
 drawLogo();
+
+const menuBtn = document.getElementById("menu-btn");
+const mobileMenu = document.getElementById("mobile-menu");
+
+if (menuBtn && mobileMenu) {
+  const menuItems = mobileMenu.querySelectorAll("li.hidden");
+  menuBtn.addEventListener("click", () => {
+    menuItems.forEach((item) => {
+      item.classList.toggle("hidden");
+    });
+  });
+}
