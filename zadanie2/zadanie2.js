@@ -2,7 +2,7 @@ function sum(x, y) {
   return x + y;
 }
 
-export function sum_strings(table) {
+function sum_strings(table) {
   let res = 0;
 
   for (const value of table) {
