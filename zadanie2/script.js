@@ -111,14 +111,14 @@ function applyStyles() {
   ];
 
   const applyConfig = (config) => {
-    config.forEach((item) => {
+    for (const item of config) {
       if (item.isCollection) {
         const elements = document.querySelectorAll(item.selector);
-        elements.forEach((element) => {
+        for (const element of elements) {
           for (const property in item.styles) {
             element.style[property] = item.styles[property];
           }
-        });
+        }
       } else {
         const element = document.querySelector(item.selector);
         if (element) {
@@ -127,7 +127,7 @@ function applyStyles() {
           }
         }
       }
-    });
+    }
   };
 
   applyConfig(baseStyles);

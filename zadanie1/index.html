@@ -69,7 +69,7 @@
         let worker = new Worker("worker.js");
 
         worker.onerror = function (event) {
-          alert("Wystąpił błąd: " + event.message);
+          window.alert("Wystąpił błąd: " + event.message);
         };
 
         worker.onmessage = function (event) {
