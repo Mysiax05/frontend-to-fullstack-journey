@@ -1,0 +1,178 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animation</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://home.agh.edu.pl/~polak/jezyki/js/lab/calculatePrimes.js"></script>
+  </head>
+
+  <body>
+    <!-- React Usage -->
+    <h2>setInterval() / setTimeout()</h2>
+    <div id="root"></div>
+    <!-- React Usage -->
+    <form onsubmit="event.preventDefault()">
+      <h2>requestAnimationFrame()</h2>
+      <label for="counter">Counter→</label>
+      <output id="counter" style="font-size: 4vh; color: red">0</output>
+      <br />
+      <button id="start" onclick="startAnimation()">Start</button>
+      <button id="stop" disabled onclick="stopAnimation()">Stop</button>
+      <!-- ************************************************************** -->
+      <hr />
+      <h2>Time-consuming calculations in the main thread</h2>
+      <label for="result_main">Result:</label>
+      <output id="result_main">0</output>
+      <br />
+      <label for="iterations_main">Number of iterations:</label>
+      <input
+        id="iterations_main"
+        type="text"
+        value="50"
+        onfocus="document.forms[0].result_main.value = '0'"
+      />
+      <button
+        onclick="
+          document.forms[0].result_main.value = calculatePrimes(
+            document.forms[0].iterations_main.value || 50,
+          )
+        "
+      >
+        Run calculations
+      </button>
+      <!-- ************************************************************** -->
+      <h2>Time-consuming calculations in a separate thread</h2>
+      <label for="result_worker">Result:</label>
+      <output id="result_worker">0</output>
+      <br />
+      <label for="iterations_worker">Number of iterations:</label>
+      <input
+        id="iterations_worker"
+        type="text"
+        value="50"
+        onfocus="document.forms[0].result_worker.value = '0'"
+      />
+      <button
+        onclick="
+          calculatePrimesInBackground(
+            document.forms[0].iterations_worker.value || 50,
+          )
+        "
+      >
+        Run calculations
+      </button>
+    </form>
+    <script>
+      let animation;
+      let counter = 0;
+
+      function calculatePrimesInBackground(iterations) {
+        let worker = new Worker("worker.js");
+
+        worker.onerror = function (event) {
+          alert("Wystąpił błąd: " + event.message);
+        };
+
+        worker.onmessage = function (event) {
+          document.forms[0].result_worker.value = event.data;
+        };
+
+        worker.postMessage(iterations);
+      }
+
+      function startAnimation() {
+        document.forms[0].start.disabled = true;
+        document.forms[0].stop.disabled = false;
+        animation = window.requestAnimationFrame(step);
+      }
+
+      function step() {
+        document.forms[0].counter.value = counter++;
+        animation = window.requestAnimationFrame(step);
+      }
+
+      function stopAnimation() {
+        document.forms[0].start.disabled = false;
+        document.forms[0].stop.disabled = true;
+        window.cancelAnimationFrame(animation);
+      }
+    </script>
+    <!-- React Part -->
+    <script type="text/babel" data-type="module">
+      import React from "https://esm.sh/react/?dev";
+      import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
+
+      function Counter(props) {
+        const [count, setCount] = React.useState(parseInt(props.initial));
+        const [isRunning, setIsRunning] = React.useState(false);
+
+        React.useEffect(() => {
+          let interval;
+
+          if (isRunning) {
+            interval = setInterval(() => {
+              setCount((prevCount) => prevCount + 1);
+            }, parseInt(props.delay));
+          }
+
+          return () => {
+            if (interval) clearInterval(interval);
+          };
+        }, [props.delay, isRunning]);
+
+        return (
+          <div
+            style={{
+              backgroundColor: "#d7e4d6",
+              padding: "15px",
+              margin: "10px 0",
+              color: "#1c3f1a",
+              position: "relative",
+              padding: ".75rem 1.25rem",
+              marginBottom: "1rem",
+              border: "0 solid #fff0",
+              borderRadius: ".5rem",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            <div>
+              Counter→{" "}
+              <span style={{ color: "red", fontSize: "4vh" }}>{count}</span>
+            </div>
+            <div>
+              <button onClick={() => setIsRunning(true)} disabled={isRunning}>
+                Start
+              </button>
+              <button
+                style={{ marginLeft: "5px" }}
+                onClick={() => setIsRunning(false)}
+                disabled={!isRunning}
+              >
+                Stop
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      function App() {
+        return (
+          <div style={{ display: "block", unicodeBidi: "isolate" }}>
+            <Counter initial="10" delay="1000" />
+            <Counter initial="15" delay="500" />
+          </div>
+        );
+      }
+
+      const container = document.getElementById("root");
+      const root = ReactDOMClient.createRoot(container);
+      root.render(<App />);
+    </script>
+    <!-- React Part -->
+  </body>
+</html>
