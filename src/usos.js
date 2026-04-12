@@ -1,18 +1,8 @@
-import "./style.css";
-
 ("use strict");
 
-const subjects = [
-  "MOWNiT",
-  "Systemy Operacyjne",
-  "Teoria Automatów",
-  "Technika Cyfrowa",
-  "Bazy Danych",
-  "Projektowanie Obiektowe",
-  "JavaScript",
-  "Rust",
-];
-const students = ["Anna Nowak", "Jerzy Zmuda"];
+import "./style.css";
+import { students, subjects } from "./data.js";
+import { renderCards } from "./render.js";
 
 function getParsedInput() {
   const rawText = document.forms["usosForm"].elements["basicInput"].value;
@@ -23,7 +13,7 @@ function addDegree() {
   const parts = getParsedInput();
 
   if (parts.length < 3) {
-    console.error("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
+    window.alert("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
     return;
   }
 
@@ -32,24 +22,26 @@ function addDegree() {
   const subject = parts[2];
 
   if (!students.includes(studentName)) {
-    console.error(`Student ${studentName} nie istnieje w bazie!`);
+    window.alert(`Student ${studentName} nie istnieje w bazie!`);
     return;
   }
   if (!subjects.includes(subject)) {
-    console.error(`Przedmiot ${subject} nie istnieje!`);
+    window.alert(`Przedmiot ${subject} nie istnieje!`);
     return;
   }
 
   const dbKey = `${studentName} - ${subject}`;
   localStorage.setItem(dbKey, degree);
   console.log(`Dodano ocenę ${degree} z ${subject} dla ${studentName}`);
+
+  renderCards();
 }
 
 function deleteDegree() {
   const parts = getParsedInput();
 
   if (parts.length < 3) {
-    console.error("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
+    window.alert("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
     return;
   }
 
@@ -58,12 +50,14 @@ function deleteDegree() {
   const dbKey = `${studentName} - ${subject}`;
 
   if (localStorage.getItem(dbKey) === null) {
-    console.warn(`Brak oceny do usunięcia dla ${studentName} z ${subject}`);
+    window.alert(`Brak oceny do usunięcia dla ${studentName} z ${subject}`);
     return;
   }
 
   localStorage.removeItem(dbKey);
   console.log(`Usunięto ocenę dla ${studentName} z ${subject}`);
+
+  renderCards();
 }
 
 function showResults() {
@@ -71,7 +65,7 @@ function showResults() {
   const studentName = parts[0];
 
   if (!studentName) {
-    console.error("Wpisz imię i nazwisko studenta, aby wyświetlić oceny.");
+    window.alert("Wpisz imię i nazwisko studenta, aby wyświetlić oceny.");
     return;
   }
 
@@ -96,3 +90,5 @@ function showResults() {
 window.addDegree = addDegree;
 window.deleteDegree = deleteDegree;
 window.showResults = showResults;
+
+renderCards();
