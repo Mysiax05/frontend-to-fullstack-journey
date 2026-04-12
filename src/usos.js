@@ -4,91 +4,54 @@ import "./style.css";
 import { students, subjects } from "./data.js";
 import { renderCards } from "./render.js";
 
-function getParsedInput() {
-  const rawText = document.forms["usosForm"].elements["basicInput"].value;
-  return rawText.split(",").map((item) => item.trim());
+const usosTabLink = document.getElementById("usos-tab-link");
+const usosForm = document.getElementById("usos-form");
+
+if (usosTabLink && usosForm) {
+  usosTabLink.addEventListener("click", (event) => {
+    event.preventDefault();
+    usosForm.classList.toggle("hidden");
+  });
 }
 
-function addDegree() {
-  const parts = getParsedInput();
+const studentSelect = document.getElementById("student-select");
+const subjectSelect = document.getElementById("subject-select");
 
-  if (parts.length < 3) {
-    window.alert("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
-    return;
-  }
+if (studentSelect && subjectSelect) {
+  students.forEach((student) => {
+    const option = document.createElement("option");
+    option.value = student;
+    option.textContent = student;
+    studentSelect.appendChild(option);
+  });
 
-  const studentName = parts[0];
-  const degree = parts[1];
-  const subject = parts[2];
-
-  if (!students.includes(studentName)) {
-    window.alert(`Student ${studentName} nie istnieje w bazie!`);
-    return;
-  }
-  if (!subjects.includes(subject)) {
-    window.alert(`Przedmiot ${subject} nie istnieje!`);
-    return;
-  }
-
-  const dbKey = `${studentName} - ${subject}`;
-  localStorage.setItem(dbKey, degree);
-  console.log(`Dodano ocenę ${degree} z ${subject} dla ${studentName}`);
-
-  renderCards();
+  subjects.forEach((subject) => {
+    const option = document.createElement("option");
+    option.value = subject;
+    option.textContent = subject;
+    subjectSelect.appendChild(option);
+  });
 }
 
-function deleteDegree() {
-  const parts = getParsedInput();
+if (usosForm) {
+  usosForm.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  if (parts.length < 3) {
-    window.alert("Zły format! Wpisz: Imię Nazwisko, Ocena, Przedmiot");
-    return;
-  }
+    const studentName = document.getElementById("student-select").value;
+    const subject = document.getElementById("subject-select").value;
+    const gradeInput = document.getElementById("grade-input");
+    const grade = gradeInput.value.trim();
 
-  const studentName = parts[0];
-  const subject = parts[2];
-  const dbKey = `${studentName} - ${subject}`;
-
-  if (localStorage.getItem(dbKey) === null) {
-    window.alert(`Brak oceny do usunięcia dla ${studentName} z ${subject}`);
-    return;
-  }
-
-  localStorage.removeItem(dbKey);
-  console.log(`Usunięto ocenę dla ${studentName} z ${subject}`);
-
-  renderCards();
-}
-
-function showResults() {
-  const parts = getParsedInput();
-  const studentName = parts[0];
-
-  if (!studentName) {
-    window.alert("Wpisz imię i nazwisko studenta, aby wyświetlić oceny.");
-    return;
-  }
-
-  console.log(`Oceny studenta: ${studentName}`);
-  let hasGrades = false;
-
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-
-    if (key.startsWith(studentName)) {
-      const grade = localStorage.getItem(key);
-      console.log(`${key}: ${grade}`);
-      hasGrades = true;
+    if (!grade) {
+      window.alert("Błąd: Proszę wpisać ocenę!");
+      return;
     }
-  }
 
-  if (!hasGrades) {
-    console.log("Ten student nie ma jeszcze żadnych ocen.");
-  }
+    localStorage.setItem(`${studentName} - ${subject}`, grade);
+
+    gradeInput.value = "";
+
+    renderCards();
+  });
 }
-
-window.addDegree = addDegree;
-window.deleteDegree = deleteDegree;
-window.showResults = showResults;
-
 renderCards();

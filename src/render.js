@@ -51,11 +51,22 @@ export function renderCards() {
 
         if (grade === "2") {
           gradeSpan.className =
-            "font-bold text-red-600 bg-red-100 px-3 py-1 rounded-full";
+            "font-bold text-red-600 bg-red-100 hover:bg-red-200 px-3 py-1 rounded-full cursor-pointer transition-colors";
         } else {
           gradeSpan.className =
-            "font-bold text-green-600 bg-green-100 px-3 py-1 rounded-full";
+            "font-bold text-green-600 bg-green-100 hover:bg-green-200 px-3 py-1 rounded-full cursor-pointer transition-colors";
         }
+
+        gradeSpan.addEventListener("click", () => {
+          const isConfirmed = window.confirm(
+            `Czy na pewno chcesz usunąć ocenę studenta ${studentName} z przedmiotu ${subject}?`,
+          );
+
+          if (isConfirmed) {
+            localStorage.removeItem(`${studentName} - ${subject}`);
+            renderCards();
+          }
+        });
 
         subjectName.appendChild(subjectTitle);
         subjectName.appendChild(gradeSpan);

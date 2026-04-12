@@ -30,7 +30,10 @@
           <li class="hidden lg:block">Studia niestacjonarne</li>
           <li class="hidden lg:block">Pracownicy</li>
           <li class="hidden lg:block lg:ml-auto">
-            <a href="usos.html" class="hover:opacity-80 transition-opacity"
+            <a
+              href="#"
+              id="usos-tab-link"
+              class="hover:opacity-80 transition-opacity"
               >USOS</a
             >
           </li>
@@ -45,36 +48,38 @@
     </header>
 
     <main class="flex flex-col items-center m-10">
-      <form name="usosForm">
+      <form
+        id="usos-form"
+        name="usosForm"
+        class="hidden flex-col items-center mt-5 w-full max-w-sm"
+      >
+        <select
+          id="student-select"
+          class="border border-gray-300 bg-white rounded-md p-3 m-2 w-full text-sm outline-none cursor-pointer"
+        ></select>
+
+        <select
+          id="subject-select"
+          class="border border-gray-300 bg-white rounded-md p-3 m-2 w-full text-sm outline-none cursor-pointer"
+        ></select>
+
         <input
-          name="basicInput"
-          placeholder="Imie Nazwisko, (Ocena, Przedmiot)"
-          class="border border-gray-300 rounded-md my-5 p-5 w-l md:w-xl text-xs"
+          id="grade-input"
+          type="text"
+          placeholder="Wpisz ocenę"
+          class="border border-gray-300 rounded-md p-3 m-2 w-full text-sm outline-none"
         />
-        <div class="flex flex-col gap-5">
-          <button
-            type="button"
-            onclick="addDegree()"
-            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
-          >
-            Dodaj
-          </button>
-          <button
-            type="button"
-            onclick="deleteDegree()"
-            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
-          >
-            Usuń
-          </button>
-          <button
-            type="button"
-            onclick="showResults()"
-            class="border border-gray-600 rounded-md p-2 hover:bg-blue-200 active:bg-gray-400"
-          >
-            Wyświetl
-          </button>
-        </div>
+
+        <p class="flex justify-center text-xs text-gray-400 m-2">
+          Wciśnij Enter w polu oceny, aby zapisać
+        </p>
+        <p class="flex justify-center text-xs text-gray-400 m-2">
+          Kliknij wybraną ocenę, aby usunąć
+        </p>
       </form>
+
+      <h1 class="text-2xl font-bold mt-5 text-gray-800">Karty Studentów</h1>
+
       <div id="students-grid" class="w-full flex flex-wrap gap-5 my-5"></div>
     </main>
     <footer class="flex justify-between align-bottom bg-blue-200 m-5 p-1">
