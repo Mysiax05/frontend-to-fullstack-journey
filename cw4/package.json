@@ -2,15 +2,25 @@
   "name": "cw4",
   "version": "1.0.0",
   "type": "module",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "description": "",
   "main": "index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
+    "globals": "^17.5.0",
+    "jest": "^30.3.0",
+    "supertest": "^7.2.2"
+  }
 }

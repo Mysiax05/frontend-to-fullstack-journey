@@ -124,6 +124,15 @@ function requestListener(request, response) {
       response.end();
       break;
 
+    case "POST /":
+      parseBody(request, (params) => {
+        response.writeHead(200, {
+          "Content-Type": "text/plain; charset=utf-8",
+        });
+        response.end(`Hello '${params.get("name")}'`);
+      });
+      break;
+
     case "GET /submit.css":
     case "GET /submit.xml":
     case "GET /submit.xsl":
@@ -244,3 +253,12 @@ const server = http.createServer(requestListener); // The 'requestListener' func
 server.listen(8000);
 console.log("The server was started on port 8000");
 console.log('To stop the server, press "CTRL + C"');
+
+function parseBody(request, callback) {
+  let body = "";
+  request.on("data", (chunk) => (body += chunk));
+  request.on("end", () => {
+    const params = new URLSearchParams(body);
+    callback(params);
+  });
+}

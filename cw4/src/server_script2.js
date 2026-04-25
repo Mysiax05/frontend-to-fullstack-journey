@@ -4,6 +4,10 @@ import fs from "node:fs";
 
 const GUEST_FILE = "guests.json";
 
+/**
+ * Wczytuje wpisy z pliku JSON.
+ * @returns {Array<{name: string, message: string}>} Lista wpisów
+ */
 function loadGuests() {
   try {
     return JSON.parse(fs.readFileSync(GUEST_FILE, "utf8"));
@@ -12,6 +16,10 @@ function loadGuests() {
   }
 }
 
+/**
+ * Zapisuje wpisy do pliku JSON.
+ * @param {Array<{name: string, message: string}>} guests - Lista wpisów
+ */
 function saveGuests(guests) {
   fs.writeFileSync(GUEST_FILE, JSON.stringify(guests, null, 2));
 }
@@ -61,6 +69,11 @@ function escapeHtml(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+/**
+ * Parsuje body żądania POST.
+ * @param {import('http').IncomingMessage} request - Żądanie HTTP
+ * @param {Function} callback - Funkcja wywoływana z parametrami formularza
+ */
 function parseBody(request, callback) {
   let body = "";
   request.on("data", (chunk) => (body += chunk));

@@ -25,3 +25,13 @@ dist-ssr
 
 # Vite cache
 .vite/
+
+# JSDoc output
+out/
+
+# Dane aplikacji (plik licznika i księgi gości)
+counter.json
+guests.json
+
+# ESLint cache
+.eslintcache
